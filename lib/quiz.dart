@@ -19,12 +19,11 @@ class _QuizState extends State<Quiz> {
   //   activeScreen = StartScreen(switchScreen);
   //   super.initState();
   // }
-  final List<String> selectedAnswers = [];
+  List<String> selectedAnswers = [];
   var activeScreen = 'start-screen';
 
   void switchScreen() {
     setState(() {
-      // activeScreen = const QuestionScreen();
       activeScreen = 'question-screen';
     });
   }
@@ -34,7 +33,8 @@ class _QuizState extends State<Quiz> {
 
     if (selectedAnswers.length == questions.length) {
       setState(() {
-        activeScreen = 'question-screen';
+        selectedAnswers = [];
+        activeScreen = 'start-screen';
       });
     }
   }
