@@ -11,22 +11,30 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  Widget? activeScreen;
+  // Widget? activeScreen;
 
-  @override
-  void initState() {
-    activeScreen = StartScreen(switchScreen);
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   activeScreen = StartScreen(switchScreen);
+  //   super.initState();
+  // }
+  var activeScreen = 'start-screen';
 
   void switchScreen() {
     setState(() {
-      activeScreen = const QuestionScreen();
+      // activeScreen = const QuestionScreen();
+      activeScreen = 'question-screen';
     });
   }
 
   @override
   Widget build(context) {
+    Widget screenWidget = StartScreen(switchScreen);
+
+    if (activeScreen == 'question-screen') {
+      screenWidget = const QuestionScreen();
+    }
+
     return MaterialApp(
       home: Scaffold(
         body: Container(
@@ -40,7 +48,11 @@ class _QuizState extends State<Quiz> {
               end: Alignment.bottomRight,
             ),
           ),
-          child: activeScreen,
+          child: screenWidget,
+          // child: activeScreen,
+          // child: activeScreen == 'start-screen'
+          //     ? StartScreen(switchScreen)
+          //     : const QuestionScreen(),
         ),
       ),
     );
